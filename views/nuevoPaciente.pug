@@ -1,0 +1,12 @@
+extends  layout
+include mixins/crearPaciente
+
+block contenido
+    .contenido-principal
+        h1 #{nombrePagina}
+
+
+        if errores 
+            each error in errores
+                .alerta.error= error.texto
+        +crearPaciente(paciente)

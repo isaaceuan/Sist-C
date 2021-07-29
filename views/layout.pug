@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        include partials/header
+        
+
+    body
+        
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+            a.navbar-brand.col-lg-11.col-md-4(href='#') Sistema Clinico Kurando
+            button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navbarNavDropdown.collapse.navbar-collapse.col-lg-1
+                ul.navbar-nav
+                    li.nav-item.active
+                        a.nav-link(href='/cerrar-sesion')
+                            | Cerrar Sesion 
+                            span.sr-only (current)
+          
+
+
+        main.contenedor 
+            aside.contenedor-proyectos
+                .panel.crear-proyectos
+                    a.boton(href="/nuevo-paciente") Nuevo paciente
+                        span +
+                
+                
+                .panel.lista-proyectos
+                    h2 Pacientes
+                    ul#proyectos.proyectos
+                        if(pacientes.length)
+                            each paciente in pacientes
+                                li
+                                    a(href=`/pacientes/${paciente.url}`)= paciente.nombre
+                                
+                            
+             
+            block contenido
+            
+    script(src="/dist/bundle.js")
+                        
+                    
+

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        include partials/header
+    body.login
+        .contenedor-formulario
+            img(src="/css/kurando-logotipo.png")
+
+            h1 Inicia sesion en Kurando
+            if error 
+                p.alerta.error=error
+
+             
+               
+            form#formulario.caja.caja-login(method="POST" action="/iniciar-sesion")
+                .campo
+                    label(for="email") Email:
+                    input(type="email" name="email" placeholder="Tu email" value= email)
+                .campo
+                    label(for="password") Password:
+                    input(type="password" name="password" placeholder="Tu Password" value= password)
+                .campo2.enviar
+                    input.boton1(type="submit" value="Iniciar Sesion")
+                .campo
+                    a(href="/crear-cuenta") Crea tu cuenta
+        script(src="/dist/bundle.js")
+    

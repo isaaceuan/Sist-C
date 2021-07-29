@@ -1,0 +1,127 @@
+extends  layout
+
+block contenido
+    .contenido-principal
+        h1 #{nombrePagina} #{paciente.nombre} 
+    
+        button.btn.btn-primary.btn-lg.center(data-toggle='modal' data-target='#modalForm')
+            | Agregar expediente al paciente
+        #modalForm.modal.fade(role='dialog')
+            .modal-dialog.modal-m
+                .modal-content
+                    .modal-header
+                        
+                        h4#myModalLabel.modal-title Expediente del paciente
+                        button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                    .modal-body
+                        p.statusMsg
+                        form(action=`/pacientes/${paciente.url}` method="POST" enctype="multipart/form-data")
+                            .form-group
+                                label(for='inputName') Fecha del expediente
+                                input#inputName.form-control(type="text" name="expediente" required)
+                            .form-group
+                                label(for='inputName') Peso
+                                input#inputName.form-control(type="text" name="peso"  required)
+                            .form-group
+                                label(for='inputName') Talla
+                                input#inputName.form-control(type="text" name="talla"  required)
+                            .form-group
+                                label(for='inputName') Edad
+                                input#inputName.form-control(type="text" name="edad"  required)
+                            .form-group
+                                label(for='inputName') Presion arterial
+                                input#inputName.form-control(type="text" name="presionArt"  required)
+                            .form-group
+                                label(for='inputName') Temperatura
+                                input#inputName.form-control(type="text" name="temperatura"  required)
+                            .form-group
+                                label(for='inputName') Frecuencia respiraatoria
+                                input#inputName.form-control(type="text" name="frecResp"  required)
+                            .form-group
+                                label(for='inputName') Frecuancia cardiaca
+                                input#inputName.form-control(type="text" name="frecCard"  required)
+                            .form-group
+                                label(for='inputName') Historial clinico
+                                textarea#exampleFormControlTextarea1.form-control(rows='3' type="text" name="historial"  required)
+                            
+                            .form-group
+                                label(for='exampleFormControlFile1') Subir archivo
+                                input#exampleFormControlFile1.form-control-file(type='file' name="urlfile" required)
+
+                            
+                            .modal-footer
+                                button.btn.btn-default(type='button' data-dismiss='modal') Close
+                                button.btn.btn-primary(type='submit') agregar
+
+
+
+
+
+       
+        if expedientes.length
+                            .cointainer-fluid
+                                .row
+                                    each expediente in expedientes
+
+                                        .col-lg-4.d-flex.justify-content-center(data-expediente=expediente.id)
+                                            .card.card.bg-light
+                                                .card-body#imp
+
+                                                    .d-flex.flex-row.justify-content-center.mb-4
+                                                        h5.card-title.text-center Fecha: 
+                                                        h5.text-center.ml-3.normal=expediente.expediente
+                                                        h5.text-center.card-title.ml-3 Talla:
+                                                        h5.text-center.ml-3.normal=expediente.talla
+                                                    .d-flex.flex-row.justify-content-center.mb-4
+                                                        h5.card-title.text-center Edad: 
+                                                        h5.text-center.ml-3.normal=expediente.edad
+                                                        h5.text-center.card-title.ml-3 Presion Arterial:
+                                                        h5.text-center.ml-3.normal=expediente.presionArt
+                                                    .d-flex.flex-row.justify-content-center.mb-4
+                                                        h5.card-title.text-center Temperatura: 
+                                                        h5.text-center.ml-3.normal=expediente.temperatura
+                                                        h5.text-center.card-title.ml-3 frecuencia Respiratoria:
+                                                        h5.text-center.ml-3.normal=expediente.frecResp
+                                                    .d-flex.flex-row.justify-content-center
+                                                        h5.card-title.text-center Frecuencia cardiaca: 
+                                                        h5.text-center.ml-3.normal=expediente.frecCard
+                                                        h5.text-center.card-title.ml-3 Historia clinica:
+                                                        h5.text-center.ml-3.normal=expediente.historial
+                                                        
+                                                        
+                                                 
+                                                   
+                                                   
+                                                .col-sm-12
+                                                    .d-flex.justify-content-center
+                                                        i.far.fa-trash-alt.fa-2x.col-sm-1
+                                                        a(href=`/uploads/${expediente.urlfile}` target='_blank')
+                                                            i.far.fa-file-pdf.fa-2x.col-sm-1
+                                                        //input(type='button' value='Imprimir' onclick='print()')
+
+
+
+
+
+
+
+                               
+
+        else
+            .col-sm-12
+                .card.card.bg-light
+                    .card-body
+                        h4.text-center No hay expedientes para el paciente
+
+                   
+                        
+                        
+                    
+
+        //pre=vardump(expedientes)
+
+        
+        .contenedor-acciones
+            a(href=`/pacientes/editar/${paciente.id}` class="boton") Editar Paciente
+            button#eliminar-proyecto( data-proyecto-url=paciente.url type="button" class="boton eliminar") Eliminar Paciente
